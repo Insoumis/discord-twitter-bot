@@ -3,6 +3,7 @@ from tweepy import OAuthHandler, Stream
 from discordWebhooks import Webhook, Attachment, Field
 import calendar, time, random, json
 from time import gmtime, strftime
+from unidecode import unidecode
 
 class StdOutListener(StreamListener):
     def on_status(self, status):
@@ -70,7 +71,6 @@ class StdOutListener(StreamListener):
 
                         wh.addAttachment(at)
 
-
                         if ('quoted_status' in data):
 
 
@@ -88,7 +88,9 @@ class StdOutListener(StreamListener):
                             field = Field(data['quoted_status']['user']['screen_name'], text)
                             at.addField(field)
 
-                        wh.post()
+                        filtered = unidecode(text).lower()
+                        if "melenchon" in filtered:
+                            wh.post()
 
         except:
             print('@@@@@@@@@@@@@@@@@@@@@@')
