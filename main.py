@@ -89,7 +89,7 @@ class StdOutListener(StreamListener):
                             at.addField(field)
 
                         filtered = unidecode(text).lower()
-                        if "melenchon" in filtered:
+                        if (("melenchon" in filtered) or ("insoumis" in filtered)):
                             wh.post()
 
         except:
